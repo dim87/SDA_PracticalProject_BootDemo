@@ -19,6 +19,10 @@ public class AuthorsService {
 
 	@Transactional(rollbackFor = Exception.class)
 	public Author save(final Author author) {
+		if (author.getName() == null) {
+			throw new RuntimeException("name is undefined");
+		}
+
 		return authorRepository.save(author);
 	}
 }
