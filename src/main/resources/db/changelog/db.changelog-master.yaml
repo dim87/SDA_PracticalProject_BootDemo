@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-authors
+      author: dls860
+      changes:
+        - sqlFile:
+            path: migrations/001-authors.sql
+
+  - changeSet:
+      id: 002-books
+      author: dls860
+      changes:
+        - sqlFile:
+            path: migrations/002-books.sql
