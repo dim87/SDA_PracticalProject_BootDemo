@@ -1,4 +1,4 @@
-package com.sda.latnikovd.springbootapp.modules.authors;
+package com.sda.latnikovd.springbootapp.controllers;
 
 import java.util.List;
 
@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sda.latnikovd.springbootapp.modules.authors.Author;
+import com.sda.latnikovd.springbootapp.modules.authors.AuthorsService;
 
 @RestController
 @RequestMapping("/authors")
