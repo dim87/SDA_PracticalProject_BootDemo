@@ -2,6 +2,7 @@ package com.sda.latnikovd.springbootapp.modules.authors;
 
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,10 @@ public class AuthorsService {
 		if (author.getName() == null) {
 			throw new RuntimeException("name is undefined");
 		}
+
+		// example validate usages
+		Validate.notNull(author, "author is undefined");
+		Validate.notBlank(author.getName(), "name is blank for author '%s'", author);
 
 		return authorRepository.save(author);
 	}
