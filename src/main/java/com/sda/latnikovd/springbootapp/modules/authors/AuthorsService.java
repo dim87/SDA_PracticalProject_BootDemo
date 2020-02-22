@@ -32,8 +32,19 @@ public class AuthorsService {
 		authorRepository.deleteById(authorId);
 	}
 
+	// We could also return null value if author was not found
 	@Transactional(readOnly = true)
-	public Author loadOne(final long authorId) {
+	public Author findById(final long authorId) {
 		return authorRepository.findById(authorId).orElseThrow(() -> new RuntimeException(String.format("author with ID '%s' was not found", authorId)));
+	}
+
+	// we are returning List of Authors here since there can be multiple search results
+	@Transactional(readOnly = true)
+	public List<Author> findBySurname(final String surname) {
+		// if we want to search by like condition (partial search) we can call
+		return authorRepository.findBySurnameLike("%" + surname + "%");
+
+		// if we want to search by strict where:
+		// return authorRepository.findBySurname(surname);
 	}
 }

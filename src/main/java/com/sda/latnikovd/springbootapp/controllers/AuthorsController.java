@@ -41,12 +41,18 @@ public class AuthorsController {
 	// this method will be run when a GET request is sent to url "http://localhost:8080/authors/9" where 9 is ID of author to delete
 	@GetMapping("/{authorId}")
 	public Author get(@PathVariable long authorId) {
-		return authorsService.loadOne(authorId);
+		return authorsService.findById(authorId);
 	}
 
 	// this method will be run when a DELETE request is sent to url "http://localhost:8080/authors/9" where 9 is ID of author to delete
 	@DeleteMapping("/{authorId}")
 	public void delete(@PathVariable long authorId) {
 		authorsService.delete(authorId);
+	}
+
+	// this method will be run when a GET request is sent to url "http://localhost:8080/authors/surname/London" where London is surname of author
+	@GetMapping("/surname/{surname}")
+	public List<Author> findBySurname(@PathVariable String surname) {
+		return authorsService.findBySurname(surname);
 	}
 }
