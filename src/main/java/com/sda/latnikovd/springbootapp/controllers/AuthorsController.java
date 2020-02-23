@@ -47,6 +47,7 @@ public class AuthorsController {
 	// this method will be run when a DELETE request is sent to url "http://localhost:8080/authors/9" where 9 is ID of author to delete
 	@DeleteMapping("/{authorId}")
 	public void delete(@PathVariable long authorId) {
+		// what do you think will happen if we try to delete an author with books?
 		authorsService.delete(authorId);
 	}
 
