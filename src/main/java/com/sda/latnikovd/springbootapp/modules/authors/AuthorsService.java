@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sda.latnikovd.springbootapp.modules.books.BookService;
+
 // here we will put all the logic for authors model
 @Service
 public class AuthorsService {
 
 	@Autowired
 	private AuthorRepository authorRepository;
+
+	@Autowired
+	private BookService bookService;
 
 	@Transactional(readOnly = true)
 	public List<Author> findAll() {
@@ -23,12 +28,16 @@ public class AuthorsService {
 	public Author save(final Author author) {
 		Validate.notNull(author, "author is undefined");
 		Validate.notBlank(author.getName(), "name is blank for author '%s'", author);
+		Validate.notBlank(author.getSurname(), "name is blank for author '%s'", author);
+		Validate.notNull(author.getBirthDate(), "name is blank for author '%s'", author);
 
 		return authorRepository.save(author);
 	}
 
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(final long authorId) {
+
+		bookService.deleteByAuthorId(authorId);
 		authorRepository.deleteById(authorId);
 	}
 

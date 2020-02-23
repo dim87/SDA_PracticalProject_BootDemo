@@ -2,6 +2,8 @@ package com.sda.latnikovd.springbootapp.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,8 @@ import com.sda.latnikovd.springbootapp.modules.authors.AuthorsService;
 // http://some_application.com/authors
 @RequestMapping("/authors")
 public class AuthorsController {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(AuthorsController.class);
 
 	@Autowired
 	private AuthorsService authorsService;
@@ -47,6 +51,7 @@ public class AuthorsController {
 	// this method will be run when a DELETE request is sent to url "http://localhost:8080/authors/9" where 9 is ID of author to delete
 	@DeleteMapping("/{authorId}")
 	public void delete(@PathVariable long authorId) {
+		LOGGER.info(String.format("User has requested deletion of author with ID '%s'", authorId));
 		// what do you think will happen if we try to delete an author with books?
 		authorsService.delete(authorId);
 	}
